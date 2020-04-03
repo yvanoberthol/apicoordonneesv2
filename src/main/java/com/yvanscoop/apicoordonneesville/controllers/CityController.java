@@ -43,7 +43,6 @@ public class CityController {
     @GetMapping("/city/get")
     public ResponseEntity<City> getCityByLatAndLong(@RequestParam(name = "latitude") Float lat, @RequestParam(name = "longitude") Float lng){
         System.out.println(lat);
-        System.out.println(lng);
         City city = cityRepository.findByCoordinateLatitudeAndCoordinateLongitude(lat,lng);
         if (city == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
