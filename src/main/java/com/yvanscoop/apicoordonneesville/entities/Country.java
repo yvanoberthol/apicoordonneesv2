@@ -17,7 +17,7 @@ public class Country implements Serializable {
     @Id @GeneratedValue
     private Long id;
 
-    @Column(unique = true,nullable = false)
+    @Column(unique = true,nullable = false,length = 200)
     private String name;
 
     private String countryCode;
@@ -25,7 +25,11 @@ public class Country implements Serializable {
     @Embedded
     private BoundingBox boundingBox;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "country", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "country")
     @JsonIgnore
     private Set<State> states = new HashSet<>();
+
+    @ElementCollection
+    @CollectionTable(name = "country_polygonPoints", joinColumns = @JoinColumn(name = "idCountry"))
+    private Set<PolygonPoint> polygonPoints = new HashSet<>();
 }

@@ -8,6 +8,6 @@ import javax.persistence.Embeddable;
 @Embeddable
 @Getter @Setter
 public class Coordinate {
-    private float latitude;
-    private float longitude;
+    private Float latitude;
+    private Float longitude;
 }

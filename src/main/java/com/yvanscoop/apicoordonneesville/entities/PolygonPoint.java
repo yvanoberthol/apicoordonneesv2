@@ -9,6 +9,6 @@ import java.io.Serializable;
 @Embeddable
 @Getter @Setter
 public class PolygonPoint implements Serializable {
-    private float lat;
-    private float lng;
+    private Float lat;
+    private Float lng;
 }

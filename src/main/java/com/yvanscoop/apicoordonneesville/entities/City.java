@@ -1,5 +1,6 @@
 package com.yvanscoop.apicoordonneesville.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,6 +11,7 @@ import java.util.Set;
 
 @Entity
 @Getter @Setter
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class City implements Serializable {
 
     @Id
@@ -22,7 +24,7 @@ public class City implements Serializable {
     @Column(unique = true)
     private Long place_id;
 
-    @Column(unique = true)
+    @Column(unique = true,nullable = false,length = 200)
     private String name;
     private String county;
 

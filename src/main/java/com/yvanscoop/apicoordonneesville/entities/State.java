@@ -19,10 +19,10 @@ public class State implements Serializable {
     @GeneratedValue
     private Long id;
 
-    @Column(unique = true,nullable = false)
+    @Column(unique = true,nullable = false,length = 250)
     private String name;
 
-    @OneToMany(targetEntity = City.class,cascade = CascadeType.ALL, mappedBy = "state", fetch = FetchType.EAGER)
+    @OneToMany(targetEntity = City.class, mappedBy = "state")
     @JsonIgnore
     private Set<City> cities = new HashSet<>();
 
@@ -32,4 +32,8 @@ public class State implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_country")
     private Country country;
+
+    @ElementCollection
+    @CollectionTable(name = "state_polygonPoints", joinColumns = @JoinColumn(name = "idState"))
+    private Set<PolygonPoint> polygonPoints = new HashSet<>();
 }

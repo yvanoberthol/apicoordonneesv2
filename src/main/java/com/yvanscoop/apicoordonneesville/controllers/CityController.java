@@ -10,9 +10,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class CityController {
@@ -40,5 +38,16 @@ public class CityController {
         cityRepository.save(city);
         response.msg = "City created with success";
         return new ResponseEntity<>(response,HttpStatus.CREATED);
+    }
+
+    @GetMapping("/city/get")
+    public ResponseEntity<City> getCityByLatAndLong(@RequestParam(name = "latitude") Float lat, @RequestParam(name = "longitude") Float lng){
+        System.out.println(lat);
+        System.out.println(lng);
+        City city = cityRepository.findByCoordinateLatitudeAndCoordinateLongitude(lat,lng);
+        if (city == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(city, HttpStatus.OK);
     }
 }
