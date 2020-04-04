@@ -9,8 +9,8 @@ import java.io.Serializable;
 @Embeddable
 @Getter @Setter
 public class BoundingBox implements Serializable {
-    private float southLatitude;
-    private float northLatitude;
-    private float westLongitude;
-    private float eastLongitude;
+    private float southLatitude; //min lng
+    private float northLatitude; //min lat
+    private float westLongitude; //max lng
+    private float eastLongitude; //max lat
 }
